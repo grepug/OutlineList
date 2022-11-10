@@ -39,6 +39,7 @@ class Tests {
                 cell
             }
         }
+        .title("abc")
     }
     
     var cell: some OLCellConvertible {

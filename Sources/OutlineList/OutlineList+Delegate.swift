@@ -7,6 +7,6 @@
 
 import AppKit
 
-extension OutlineListView: NSOutlineViewDelegate {
+class OutlineListViewDelegate: NSObject, NSOutlineViewDelegate {
     
 }
