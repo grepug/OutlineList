@@ -7,10 +7,6 @@
 
 import AppKit
 
-class OutlineListView: NSOutlineView {
-    
-}
-
-protocol OutlineItem: AnyObject {
+extension OutlineListView: NSOutlineViewDelegate {
     
 }
