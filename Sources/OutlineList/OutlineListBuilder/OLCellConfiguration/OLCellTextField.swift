@@ -8,17 +8,17 @@
 import AppKit
 import SwiftUI
 
-struct OLCellTextField {
-    var text: String
-    var font: NSFont?
+public struct OLCellTextField {
+    public var text: String
+    public var font: NSFont?
     
-    init(text: String) {
+    public init(text: String) {
         self.text = text
     }
 }
 
 extension OLCellTextField: OLCellConfigurationConvertible {
-    func asConfig() -> [OLCellConfigurationConvertible] {
+    public func asConfig() -> [OLCellConfigurationConvertible] {
         [self]
     }
 }

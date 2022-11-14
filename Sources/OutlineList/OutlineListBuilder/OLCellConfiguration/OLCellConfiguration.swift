@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol OLCellConfigurationConvertible {
+public protocol OLCellConfigurationConvertible {
     func asConfig() -> [OLCellConfigurationConvertible]
 }

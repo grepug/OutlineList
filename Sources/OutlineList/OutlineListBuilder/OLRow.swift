@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct OLRow {
-    var id: String
-    var parentID: String?
-    var cellConfigurations: [OLCellConfigurationConvertible]
+public struct OLRow {
+    public var id: String
+    public var parentID: String?
+    public var cellConfigurations: [OLCellConfigurationConvertible]
     
-    init(id: String, @OLBuilder configurations: () -> [OLCellConfigurationConvertible]) {
+    public init(id: String, @OLBuilder configurations: () -> [OLCellConfigurationConvertible]) {
         self.id = id
         self.cellConfigurations = configurations()
     }
 }
 
-extension OLRow {
+public extension OLRow {
     func parentID(_ id: String) -> Self {
         var me = self
         me.parentID = id

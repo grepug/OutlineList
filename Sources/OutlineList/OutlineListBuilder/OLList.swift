@@ -7,21 +7,21 @@
 
 import AppKit
 
-struct OLCoumnConfiguration {
-    var title: String
+public struct OLCoumnConfiguration {
+    public var title: String
 }
 
-struct OLList {
+public struct OLList {
     var rows: [OLRow]
     var showingColumnHeaders: Bool = false
     var columnConfigurations: [OLCoumnConfiguration] = []
     
-    init(@OLBuilder rows: () -> [OLRow]) {
+    public init(@OLBuilder rows: () -> [OLRow]) {
         self.rows = rows()
     }
 }
 
-extension OLList {
+public extension OLList {
     func showColumnHeaders(_ showing: Bool) -> Self {
         var me = self
         me.showingColumnHeaders = showing

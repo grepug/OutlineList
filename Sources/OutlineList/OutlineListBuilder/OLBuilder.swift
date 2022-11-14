@@ -8,9 +8,9 @@
 import Foundation
 
 @resultBuilder
-struct OLBuilder {}
+public struct OLBuilder {}
 
-extension OLBuilder {
+public extension OLBuilder {
     static func buildBlock(_ components: OLList) -> OLList {
         components
     }
@@ -24,7 +24,7 @@ extension OLBuilder {
     }
 }
 
-extension OLBuilder {
+public extension OLBuilder {
     static func buildArray(_ components: [OLRow]) -> [OLRow] {
         components
     }
@@ -46,7 +46,7 @@ extension OLBuilder {
     }
 }
 
-extension OLBuilder {
+public extension OLBuilder {
     static func buildBlock(_ components: OLCellConfigurationConvertible...) -> [OLCellConfigurationConvertible] {
         components
     }
