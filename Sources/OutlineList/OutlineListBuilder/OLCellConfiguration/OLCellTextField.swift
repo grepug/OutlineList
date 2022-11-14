@@ -18,7 +18,16 @@ public struct OLCellTextField {
 }
 
 extension OLCellTextField: OLCellConfigurationConvertible {
-    public func asConfig() -> [OLCellConfigurationConvertible] {
-        [self]
+    public func nsView() -> NSView {
+        let field = NSTextField(string: text)
+        field.isEditable = false
+        field.isBordered = false
+        field.drawsBackground = false
+        field.isBezeled = false
+        field.cell?.wraps = false
+        field.usesSingleLineMode = true
+        field.maximumNumberOfLines = 1
+        
+        return field
     }
 }

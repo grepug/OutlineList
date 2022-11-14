@@ -5,8 +5,8 @@
 //  Created by Kai Shao on 2022/11/10.
 //
 
-import Foundation
+import AppKit
 
 public protocol OLCellConfigurationConvertible {
-    func asConfig() -> [OLCellConfigurationConvertible]
+    func nsView() -> NSView
 }

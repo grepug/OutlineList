@@ -8,9 +8,10 @@
 import Foundation
 
 public struct OLRow {
-    public var id: String
-    public var parentID: String?
-    public var cellConfigurations: [OLCellConfigurationConvertible]
+    var id: String
+    var parentID: String?
+    var height: CGFloat?
+    var cellConfigurations: [OLCellConfigurationConvertible]
     
     public init(id: String, @OLBuilder configurations: () -> [OLCellConfigurationConvertible]) {
         self.id = id
@@ -19,9 +20,15 @@ public struct OLRow {
 }
 
 public extension OLRow {
-    func parentID(_ id: String) -> Self {
+    func parentID(_ id: String?) -> Self {
         var me = self
         me.parentID = id
+        return me
+    }
+    
+    func height(_ height: CGFloat?) -> Self {
+        var me = self
+        me.height = height
         return me
     }
 }

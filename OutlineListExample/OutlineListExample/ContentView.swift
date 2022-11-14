@@ -13,6 +13,10 @@ struct ContentView: View {
     var body: some View {
         VStack {
             MyControllerWrapper(list: TestList())
+            
+            Button("Add") {
+                
+            }
         }
         .padding()
     }
@@ -21,20 +25,30 @@ struct ContentView: View {
 struct TestList: OutlineList {
     func body(_ controller: MyController) -> OLList {
         OLList {
-            for _ in 0..<1 {
-                OLRow(id: "") {
-                    OLCellTextField(text: "")
-                    OLCellTextField(text: "")
-                    OLCellTextField(text: "")
-                    OLCellSwiftUI {
-                        
-                    }
+            OLRow(id: "a1") {
+                OLCellTextField(text: "\(controller.text)")
+                OLCellTextField(text: "abc")
+                OLCellSwiftUI {
+                    Color.red
                 }
-                .parentID("1")
             }
+            
+            OLRow(id: "a2") {
+                OLCellTextField(text: "abc")
+                OLCellTextField(text: "abc1")
+                OLCellSwiftUI {
+                    Color.green
+                }
+            }
+            .parentID("a1")
+            .height(80)
         }
         .showColumnHeaders(true)
-        .columnConfigurations([])
+        .columns([
+            .init(title: "a"),
+            .init(title: "textField"),
+            .init(title: "haha")
+        ])
     }
 }
 
@@ -43,7 +57,6 @@ class MyController: OutlineListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        reload()
     }
     
 }

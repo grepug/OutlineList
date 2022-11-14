@@ -8,11 +8,20 @@
 import AppKit
 
 public class OutlineListView: NSOutlineView {
-    var list: OLList
+    var list: OLList {
+        didSet {
+            idTree = makeIDTree(list: list)
+        }
+    }
+    
+    var referenceIDMap: [String: NSString] = [:]
+    var idTree: [NSString?: [NSString]] = [:]
     
     init(list: OLList) {
         self.list = list
         super.init(frame: .zero)
+        
+        self.idTree = makeIDTree(list: list)
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +47,32 @@ public class OutlineListView: NSOutlineView {
     }
 }
 
-protocol OutlineItem: AnyObject {
+extension OutlineListView {
+    func refID(_ id: String) -> NSString {
+        if let id = referenceIDMap[id] {
+            return id
+        }
+        
+        let refID = NSString(string: id)
+        referenceIDMap[id] = refID
+        
+        return refID
+    }
     
+    func makeIDTree(list: OLList) -> [NSString?: [NSString]] {
+        var tree: [NSString?: [NSString]] = [:]
+            
+        for row in list.rows {
+            let id = refID(row.id)
+            let parentID = row.parentID.map { refID($0) }
+            
+            if tree[parentID] == nil {
+                tree[parentID] = []
+            }
+            
+            tree[parentID]!.append(id)
+        }
+        
+        return tree
+    }
 }

@@ -9,6 +9,10 @@ import AppKit
 
 public struct OLCoumnConfiguration {
     public var title: String
+    
+    public init(title: String) {
+        self.title = title
+    }
 }
 
 public struct OLList {
@@ -28,7 +32,7 @@ public extension OLList {
         return me
     }
     
-    func columnConfigurations(_ configs: [OLCoumnConfiguration]) -> Self {
+    func columns(_ configs: [OLCoumnConfiguration]) -> Self {
         var me = self
         me.columnConfigurations = configs
         return me

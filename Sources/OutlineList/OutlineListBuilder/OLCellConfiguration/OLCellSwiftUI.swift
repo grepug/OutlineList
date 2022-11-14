@@ -14,7 +14,7 @@ public struct OLCellSwiftUI<Content: View>: OLCellConfigurationConvertible {
         self.content = content()
     }
     
-    public func asConfig() -> [OLCellConfigurationConvertible] {
-        [self]
+    public func nsView() -> NSView {
+        NSHostingView(rootView: content)
     }
 }
