@@ -27,17 +27,17 @@ class OutlineListView: NSOutlineView {
             return
         }
         
-        let columns = list.columns
-        
-        for col in columns {
-            let column = NSTableColumn(identifier: .init(col.id))
-            
-            if let title = col.title {
-                column.title = title
-            }
-            
-            addTableColumn(column)
-        }
+//        let columns = list.columns
+//        
+//        for col in columns {
+//            let column = NSTableColumn(identifier: .init(col.id))
+//            
+//            if let title = col.title {
+//                column.title = title
+//            }
+//            
+//            addTableColumn(column)
+//        }
     }
 }
 
