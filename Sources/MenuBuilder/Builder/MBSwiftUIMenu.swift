@@ -12,23 +12,43 @@ public struct MBSwiftUIMenu<Content: View>: MBMenuConvertible {
     public var children: [MBMenuConvertible]?
     public var action: (() -> Void)?
     var content: Content
+    var width: CGFloat = 80
+    var height: CGFloat = 40
  
     public func makeMenuItem() -> NSMenuItem {
         let menuItem = NSMenuItem()
-        menuItem.view = NSHostingView(rootView: content)
+        let view = NSHostingView(rootView: content)
+        view.frame = .init(x: 0, y: 0, width: width, height: height)
+        menuItem.view = view
         
         return menuItem
     }
 }
 
 public extension MBSwiftUIMenu {
-    init(@ViewBuilder content: () -> Content, @MenuBuilder children: () -> [MBMenuConvertible]) {
+    init(_ width: CGFloat? = nil, _ height: CGFloat? = nil, @ViewBuilder content: () -> Content, @MenuBuilder children: () -> [MBMenuConvertible]) {
         self.content = content()
         self.children = children()
+        
+        if let width {
+            self.width = width
+        }
+        
+        if let height {
+            self.height = height
+        }
     }
     
-    init(@ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+    init(_ width: CGFloat? = nil, _ height: CGFloat? = nil, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
         self.content = content()
         self.action = action
+        
+        if let width {
+            self.width = width
+        }
+        
+        if let height {
+            self.height = height
+        }
     }
 }

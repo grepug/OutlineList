@@ -37,7 +37,7 @@ public extension MBMenu {
         self.children = children()
     }
     
-    init(_ title: String, action: @escaping () -> Void) {
+    init(_ title: String, action: (() -> Void)? = nil) {
         self.title = title
         self.action = action
     }

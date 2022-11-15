@@ -45,11 +45,11 @@ struct TestList: OutlineListSwiftUIView {
             }
             .menus {
                 MBMenu("hi") {
-                    print("111")
+                    MBMenu("hi")
                 }
                 
                 MBSwiftUIMenu {
-                    Color.red
+                    Color.yellow
                 } action: {
                     
                 }
