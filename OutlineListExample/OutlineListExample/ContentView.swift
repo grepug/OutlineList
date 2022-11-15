@@ -15,9 +15,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if controller.showing {
-                TestList(controller)
-            }
+            TestList(controller)
             
             Button("Add") {
                 controller.showing.toggle()
@@ -45,15 +43,17 @@ struct TestList: OutlineListSwiftUIView {
             }
             .menus {
                 MBMenu("hi") {
-                    MBMenu("hi")
+                    MBMenu("hi") { col in
+                        print("col", col)
+                    }
                 }
                 
                 MBSeparator()
                 
                 MBSwiftUIMenu {
-                    Color.yellow
-                } action: {
-                    
+                    Button("test") {
+                        controller.dismissMenu()
+                    }
                 }
                 
                 MBSeparator()
@@ -63,11 +63,8 @@ struct TestList: OutlineListSwiftUIView {
                 } children: {
                     MBSwiftUIMenu {
                         Color.green
-                    } action: {
-                        
                     }
                 }
-
             }
             
             OLRow(id: "a2") {

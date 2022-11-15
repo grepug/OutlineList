@@ -9,38 +9,70 @@
 import AppKit
 
 public class MBMenuHandler: NSObject {
-    var contextMenuActions = [String: () -> Void]()
+    var contextMenuActions = [ActionKey: MBMenuAction]()
     
     @objc func handleMenuEvent(_ sender: Any) {
         let menuItem = sender as! NSMenuItem
         let id = menuItem.identifier!.rawValue
+        let actionKey = ActionKey(menuIdentifier: id)
         
-        contextMenuActions[id]?()
+        contextMenuActions[actionKey]?(actionKey.column)
     }
     
     public override init() {}
 }
 
 public extension MBMenuHandler {
-    func makeItems(mbMenus: [MBMenuConvertible], menu: NSMenu = .init()) -> NSMenu {
+    func makeItems(mbMenus: [MBMenuConvertible], column: Int, menu: NSMenu = .init(), removingAll: Bool = true) -> NSMenu {
+        if removingAll {
+            contextMenuActions.removeAll()
+        }
+        
         for mbMenu in mbMenus {
             if let children = mbMenu.children {
-                let childMenu = makeItems(mbMenus: children, menu: .init(title: ""))
+                let childMenu = makeItems(mbMenus: children,
+                                          column: column,
+                                          menu: .init(title: ""),
+                                          removingAll: false)
                 let menuItem = mbMenu.makeMenuItem()
                 
                 menuItem.submenu = childMenu
                 menu.addItem(menuItem)
             } else {
                 let menuItem = mbMenu.makeMenuItem()
+                let actionKey = ActionKey(id: mbMenu.id, column: column)
+                
                 menuItem.target = self
-                menuItem.identifier = .init(rawValue: mbMenu.id)
+                menuItem.identifier = .init(rawValue: actionKey.identifier)
                 menuItem.action = #selector(handleMenuEvent(_:))
                 menu.addItem(menuItem)
-                contextMenuActions[mbMenu.id] = mbMenu.action
+                contextMenuActions[actionKey] = mbMenu.action
             }
         }
         
         return menu
+    }
+}
+
+extension MBMenuHandler {
+    struct ActionKey: Hashable {
+        private var id: String
+        var column: Int
+        
+        init(id: String, column: Int) {
+            self.id = id
+            self.column = column
+        }
+        
+        init(menuIdentifier: String) {
+            let elements = menuIdentifier.split(separator: "@")
+            self.id = String(elements[0])
+            self.column = Int(String(elements[1]))!
+        }
+        
+        var identifier: String {
+            "\(id)@\(column)"
+        }
     }
 }
 #endif

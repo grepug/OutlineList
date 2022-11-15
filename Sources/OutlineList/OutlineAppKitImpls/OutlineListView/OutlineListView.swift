@@ -22,6 +22,7 @@ public class OutlineListView: NSOutlineView {
     
     private let menuHandler = MBMenuHandler()
     private var contextualRect = NSRect()
+    public var currentMenu: NSMenu?
     
     init(list: OLList) {
         self.list = list
@@ -74,8 +75,8 @@ public class OutlineListView: NSOutlineView {
         
         guard row > -1 else { return nil }
         
-        let item = item(atRow: row) as! Item
-        let menu = menuHandler.makeItems(mbMenus: list.rows[row].menus)
+        let menu = menuHandler.makeItems(mbMenus: list.rows[row].menus, column: col)
+        currentMenu = menu
         
         return menu
     }

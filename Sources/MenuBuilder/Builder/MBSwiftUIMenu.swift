@@ -10,7 +10,7 @@ import SwiftUI
 public struct MBSwiftUIMenu<Content: View>: MBMenuConvertible {
     public var id: String = UUID().uuidString
     public var children: [MBMenuConvertible]?
-    public var action: (() -> Void)?
+    public var action: MBMenuAction?
     var content: Content
     var width: CGFloat = 80
     var height: CGFloat = 40
@@ -39,9 +39,8 @@ public extension MBSwiftUIMenu {
         }
     }
     
-    init(_ width: CGFloat? = nil, _ height: CGFloat? = nil, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+    init(_ width: CGFloat? = nil, _ height: CGFloat? = nil, @ViewBuilder content: () -> Content) {
         self.content = content()
-        self.action = action
         
         if let width {
             self.width = width

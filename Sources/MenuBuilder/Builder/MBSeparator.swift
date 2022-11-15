@@ -9,7 +9,7 @@ import AppKit
 
 public struct MBSeparator: MBMenuConvertible {
     public var id: String = UUID().uuidString
-    public var action: (() -> Void)?
+    public var action: MBMenuAction?
     public var children: [MBMenuConvertible]?
     
     public func makeMenuItem() -> NSMenuItem {

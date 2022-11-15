@@ -52,3 +52,9 @@ open class OutlineListViewController: NSViewController, ObservableObject {
         outlineView.setupColumns()
     }
 }
+
+public extension OutlineListViewController {
+    func dismissMenu() {
+        outlineView.currentMenu?.cancelTracking()
+    }
+}
