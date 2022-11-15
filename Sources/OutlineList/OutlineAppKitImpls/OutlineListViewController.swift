@@ -8,15 +8,13 @@
 import AppKit
 import SwiftUI
 
-open class OutlineListViewController: NSViewController {
+open class OutlineListViewController: NSViewController, ObservableObject {
     public var outlineView: OutlineListView!
-    var listBody: any OutlineList
     
     var dataSource: OutlineListViewDataSource
     var delegate: OutlineListViewDelegate
     
-    public init(_ listBody: some OutlineList) {
-        self.listBody = listBody
+    required public init() {
         self.dataSource = .init()
         self.delegate = .init()
         super.init(nibName: nil, bundle: nil)
@@ -30,8 +28,8 @@ open class OutlineListViewController: NSViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var list: OLList {
-        listBody.untypedBody(self)
+    open var list: OLList {
+        fatalError("has not been implemented")
     }
     
     public override func loadView() {
@@ -52,8 +50,5 @@ open class OutlineListViewController: NSViewController {
     
     open func reload() {
         outlineView.setupColumns()
-//        outlineView.reloadData()
-//        outlineView.reloadData(forRowIndexes: [0, 1], columnIndexes: [0])
-//        outlineView.reloadItem(outlineView.refID("a1"), reloadChildren: true)
     }
 }

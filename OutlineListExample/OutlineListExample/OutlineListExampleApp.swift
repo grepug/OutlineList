@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct OutlineListExampleApp: App {
+    @State var showing = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VStack {
+                Button("Toggle") {
+                    showing.toggle()
+                }
+                
+                if showing {
+                    ContentView()
+                }
+            }
         }
     }
 }

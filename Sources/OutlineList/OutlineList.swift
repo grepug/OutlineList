@@ -6,15 +6,19 @@
 //
 
 import AppKit
+import SwiftUI
 
 public protocol OutlineList {
     associatedtype ViewController: OutlineListViewController
     
-    func body(_ controller: ViewController) -> OLList
+    var controller: ViewController { get }
+    var list: OLList { get }
 }
 
-extension OutlineList {
-    func untypedBody(_ controller: OutlineListViewController) -> OLList {
-        body(controller as! ViewController)
+public protocol OutlineListSwiftUIView: OutlineList, View {}
+
+public extension OutlineListSwiftUIView {
+    var body: some View {
+        OutlineListViewControllerRepresentable<ViewController>(controller: controller)
     }
 }

@@ -10,20 +10,30 @@ import OutlineList
 import AppKit
 
 struct ContentView: View {
+    @StateObject var controller = MyController()
+    
     var body: some View {
         VStack {
-            MyControllerWrapper(list: TestList())
+            if controller.showing {
+                TestList(controller)
+            }
             
             Button("Add") {
-                
+                controller.showing.toggle()
             }
         }
         .padding()
     }
 }
 
-struct TestList: OutlineList {
-    func body(_ controller: MyController) -> OLList {
+struct TestList: OutlineListSwiftUIView {
+    let controller: MyController
+    
+    init(_ controller: MyController) {
+        self.controller = controller
+    }
+    
+    var list: OLList {
         OLList {
             OLRow(id: "a1") {
                 OLCellTextField(text: "\(controller.text)")
@@ -53,24 +63,19 @@ struct TestList: OutlineList {
 }
 
 class MyController: OutlineListViewController {
-    var text = "the part of the human body that is on the opposite side to the chest, between the neck and the tops of the legs; the part of an animal’s body"
+    @Published var text = "the part of the human body that is on the opposite side to the chest, between the neck and the tops of the legs; the part of an animal’s body"
+    
+    @Published var showing = false
+    
+    override var list: OLList {
+        TestList(self).list
+    }
+    
+    deinit {
+        print("deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-}
-
-struct MyControllerWrapper: NSViewControllerRepresentable {
-    typealias NSViewControllerType = MyController
-    
-    var list: any OutlineList
-    
-    func makeNSViewController(context: Context) -> MyController {
-        .init(list)
-    }
-    
-    func updateNSViewController(_ nsViewController: MyController, context: Context) {
-        
     }
 }
