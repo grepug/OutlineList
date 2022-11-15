@@ -8,6 +8,7 @@
 import SwiftUI
 import OutlineList
 import AppKit
+import MenuBuilder
 
 struct ContentView: View {
     @StateObject var controller = MyController()
@@ -41,6 +42,28 @@ struct TestList: OutlineListSwiftUIView {
                 OLCellSwiftUI {
                     Color.red
                 }
+            }
+            .menus {
+                MBMenu("hi") {
+                    print("111")
+                }
+                
+                MBSwiftUIMenu {
+                    Color.red
+                } action: {
+                    
+                }
+                
+                MBSwiftUIMenu {
+                    Color.red
+                } children: {
+                    MBSwiftUIMenu {
+                        Color.green
+                    } action: {
+                        
+                    }
+                }
+
             }
             
             OLRow(id: "a2") {

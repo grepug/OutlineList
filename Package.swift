@@ -11,6 +11,9 @@ let package = Package(
         .library(
             name: "OutlineList",
             targets: ["OutlineList"]),
+        .library(
+            name: "MenuBuilder",
+            targets: ["MenuBuilder"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -21,7 +24,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "OutlineList",
-            dependencies: []),
+            dependencies: ["MenuBuilder"],
+            path: "Sources/OutlineList"),
+        .target(
+            name: "MenuBuilder",
+            dependencies: [],
+            path: "Sources/MenuBuilder"),
         .testTarget(
             name: "OutlineListTests",
             dependencies: ["OutlineList"]),

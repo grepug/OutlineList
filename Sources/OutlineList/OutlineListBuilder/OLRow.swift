@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import MenuBuilder
 
 public struct OLRow {
     var id: String
     var parentID: String?
     var height: CGFloat?
     var cellConfigurations: [OLCellConfigurationConvertible]
+    var menus: [MBMenuConvertible] = []
     
     public init(id: String, @OLBuilder configurations: () -> [OLCellConfigurationConvertible]) {
         self.id = id
@@ -29,6 +31,12 @@ public extension OLRow {
     func height(_ height: CGFloat?) -> Self {
         var me = self
         me.height = height
+        return me
+    }
+    
+    func menus(@MenuBuilder _ menus: () -> [MBMenuConvertible]) -> Self {
+        var me = self
+        me.menus = menus()
         return me
     }
 }
