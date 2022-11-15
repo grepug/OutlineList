@@ -34,7 +34,7 @@ struct TestList: OutlineList {
             }
             
             OLRow(id: "a2") {
-                OLCellTextField(text: "abc")
+                OLCellTextField(text: "the part of the human body that is on the opposite side to the chest, between the neck and the tops of the legs; the part of an animal’s body")
                 OLCellTextField(text: "abc1")
                 OLCellSwiftUI {
                     Color.green
@@ -53,7 +53,7 @@ struct TestList: OutlineList {
 }
 
 class MyController: OutlineListViewController {
-    var text = 1
+    var text = "the part of the human body that is on the opposite side to the chest, between the neck and the tops of the legs; the part of an animal’s body"
     
     override func viewDidLoad() {
         super.viewDidLoad()
