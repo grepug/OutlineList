@@ -48,11 +48,15 @@ struct TestList: OutlineListSwiftUIView {
                     MBMenu("hi")
                 }
                 
+                MBSeparator()
+                
                 MBSwiftUIMenu {
                     Color.yellow
                 } action: {
                     
                 }
+                
+                MBSeparator()
                 
                 MBSwiftUIMenu {
                     Color.red
