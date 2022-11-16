@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 #endif
 
-public typealias MBMenuAction = (Int) -> Void
+public typealias MBMenuAction = () -> Void
 
 public protocol MBMenuConvertible {
     var id: String { get }
@@ -25,7 +25,7 @@ public protocol MBMenuConvertible {
 public struct MBMenu: MBMenuConvertible {
     var title: String?
     public var id: String = UUID().uuidString
-    public var action: ((Int) -> Void)?
+    public var action: (MBMenuAction)?
     public var children: [MBMenuConvertible]?
     
     public func makeMenuItem() -> NSMenuItem {

@@ -16,7 +16,7 @@ public class MBMenuHandler: NSObject {
         let id = menuItem.identifier!.rawValue
         let actionKey = ActionKey(menuIdentifier: id)
         
-        contextMenuActions[actionKey]?(actionKey.column)
+        contextMenuActions[actionKey]?()
     }
     
     public override init() {}
@@ -55,6 +55,7 @@ public extension MBMenuHandler {
 }
 
 extension MBMenuHandler {
+    /// The struct to identify a menu item, which is meaningless right now, since we don't distinguish columns on menu items
     struct ActionKey: Hashable {
         private var id: String
         var column: Int

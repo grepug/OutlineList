@@ -41,9 +41,9 @@ struct TestList: OutlineListSwiftUIView {
                     Color.red
                 }
             }
-            .menus {
+            .menus { col in
                 MBMenu("hi") {
-                    MBMenu("hi") { col in
+                    MBMenu("hi") {
                         print("col", col)
                     }
                 }

@@ -8,12 +8,14 @@
 import Foundation
 import MenuBuilder
 
+public typealias OLRowMenus = (Int) -> [MBMenuConvertible]
+
 public struct OLRow {
     var id: String
     var parentID: String?
     var height: CGFloat?
     var cellConfigurations: [OLCellConfigurationConvertible]
-    var menus: [MBMenuConvertible] = []
+    var menus: OLRowMenus?
     
     public init(id: String, @OLBuilder configurations: () -> [OLCellConfigurationConvertible]) {
         self.id = id
@@ -34,9 +36,9 @@ public extension OLRow {
         return me
     }
     
-    func menus(@MenuBuilder _ menus: () -> [MBMenuConvertible]) -> Self {
+    func menus(@MenuBuilder _ menus: @escaping OLRowMenus) -> Self {
         var me = self
-        me.menus = menus()
+        me.menus = menus
         return me
     }
 }

@@ -58,9 +58,15 @@ extension OutlineListView {
         let row = row(for: event)
         let col = column(for: event)
         
-        guard row > -1 else { return nil }
+        guard row > -1 else {
+            return nil
+        }
         
-        let menu = menuHandler.makeItems(mbMenus: list.rows[row].menus, column: col)
+        guard let mbMenus = list.rows[row].menus else {
+            return nil
+        }
+        
+        let menu = menuHandler.makeItems(mbMenus: mbMenus(col), column: col)
         currentMenu = menu
         
         return menu
