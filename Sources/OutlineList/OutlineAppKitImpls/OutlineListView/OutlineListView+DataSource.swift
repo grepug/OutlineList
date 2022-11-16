@@ -34,7 +34,7 @@ class OutlineListViewDataSource: NSObject, NSOutlineViewDataSource {
 }
 
 extension OutlineListViewDataSource {
-    private func typedItem(_ item: Any) -> NSString {
-        item as! NSString
+    private func typedItem(_ item: Any) -> OutlineListView.ID {
+        item as! OutlineListView.ID
     }
 }

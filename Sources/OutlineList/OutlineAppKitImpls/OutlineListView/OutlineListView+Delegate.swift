@@ -37,7 +37,7 @@ class OutlineListViewDelegate: NSObject, NSOutlineViewDelegate {
 
 extension OutlineListViewDelegate {
     func row(_ item: Any, in list: OLList) -> OLRow {
-        let rowID = item as! NSString
+        let rowID = item as! OutlineListView.ID
         
         guard let row = list.rows.first(where: { row in
             row.id == rowID as String

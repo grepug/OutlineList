@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NSTableView+Utils.swift
 //  
 //
 //  Created by Kai Shao on 2022/11/15.
