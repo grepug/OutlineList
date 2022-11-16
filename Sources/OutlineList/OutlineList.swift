@@ -11,7 +11,7 @@ import SwiftUI
 public protocol OutlineList {
     associatedtype ViewController: OutlineListViewController
     
-    var controller: ViewController { get }
+    var vc: () -> ViewController { get }
     var list: OLList { get }
 }
 
@@ -19,6 +19,6 @@ public protocol OutlineListSwiftUIView: OutlineList, View {}
 
 public extension OutlineListSwiftUIView {
     var body: some View {
-        OutlineListViewControllerRepresentable<ViewController>(controller: controller)
+        OutlineListViewControllerRepresentable<ViewController>(controller: vc())
     }
 }

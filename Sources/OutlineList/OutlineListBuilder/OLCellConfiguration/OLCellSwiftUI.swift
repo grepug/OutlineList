@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct OLCellSwiftUI<Content: View>: OLCellConfigurationConvertible {
+public struct OLCellSwiftUI<Content: View>: OLCell {
     var content: Content
     
     public init(@ViewBuilder content: () -> Content) {

@@ -14,10 +14,10 @@ public struct OLRow {
     var id: String
     var parentID: String?
     var height: CGFloat?
-    var cellConfigurations: [OLCellConfigurationConvertible]
+    var cellConfigurations: [OLCell]
     var menus: OLRowMenus?
     
-    public init(id: String, @OLBuilder configurations: () -> [OLCellConfigurationConvertible]) {
+    public init(id: String, @OLBuilder configurations: () -> [OLCell]) {
         self.id = id
         self.cellConfigurations = configurations()
     }

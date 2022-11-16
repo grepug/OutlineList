@@ -10,39 +10,31 @@ import MenuBuilder
 import OutlineList
 
 struct TestList: OutlineListSwiftUIView {
-    let controller: MyController
-    
-    init(_ controller: MyController) {
-        self.controller = controller
-    }
+    var vc: () -> MyController
     
     var list: OLList {
         OLList {
             OLCoumn()
             OLCoumn("a")
             OLCoumn("b")
-        } rows: { [unowned controller] in
-            OLRow(id: "a1") {
-                OLCellTextField(text: "\(controller.text)")
-                OLCellSwiftUI {
-                    Color.blue
+        } rows: {
+            for id in vc().data {
+                OLRow(id: id) {
+                    OLCellTextField(text: "\(vc().text)")
+                    swiftUICell
+                    OLCellSwiftUI {
+                        CellView(count: vc().count)
+                    }
                 }
-                OLCellSwiftUI {
-                    Color.red
+                .menus {
+                    menus(for: $0)
                 }
-            }
-            .menus { col in
-                TestMenus().menus(for: col)
             }
         }
         .showColumnHeaders(true)
         .useAlternatingRowBackgroundColors(true)
     }
     
-   
-}
-
-struct TestMenus {
     @MenuBuilder
     func menus(for col: Int) -> [MBMenuConvertible] {
         MBMenu("hi") {
@@ -53,7 +45,7 @@ struct TestMenus {
         MBSeparator()
         MBSwiftUIMenu {
             Button("test") {
-//                controller.dismissMenu()
+                vc().dismissMenu()
             }
         }
         MBSeparator()
@@ -65,13 +57,25 @@ struct TestMenus {
             }
         }
     }
+    
+    var swiftUICell: some OLCell {
+        OLCellSwiftUI {
+            Button("test") {
+                Task {
+                    try! await Task.sleep(nanoseconds: 2_000_000_000)
+                    await print(vc().testID, vc().isShowing)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
 }
 
 struct CellView: View {
-    @ObservedObject var controller: MyController
+    var count: Int
     
     var body: some View {
-        Text("\(controller.count)")
+        Text("\(count)")
     }
 }
 
@@ -80,15 +84,20 @@ class MyController: OutlineListViewController {
     @Published var showing = false
     @Published var count = 0
     
+    var data: [String] = ["a1", "a2", "3", "4"]
+    
+    var testID = UUID().uuidString
+    
     override var list: OLList {
-        TestList(self).list
+        TestList(vc: { [unowned self] in self }).list
     }
     
     deinit {
-        print("deinit")
+        print("deinit", testID)
     }
     
     override func viewDidLoad() {
+        print("init", testID)
         super.viewDidLoad()
     }
     

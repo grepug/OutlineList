@@ -7,6 +7,6 @@
 
 import AppKit
 
-public protocol OLCellConfigurationConvertible {
+public protocol OLCell {
     func nsView() -> NSView
 }

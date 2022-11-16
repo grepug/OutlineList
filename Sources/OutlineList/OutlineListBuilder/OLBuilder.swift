@@ -47,7 +47,7 @@ public extension OLBuilder {
 }
 
 public extension OLBuilder {
-    static func buildBlock(_ components: OLCellConfigurationConvertible...) -> [OLCellConfigurationConvertible] {
+    static func buildBlock(_ components: OLCell...) -> [OLCell] {
         components
     }
 }

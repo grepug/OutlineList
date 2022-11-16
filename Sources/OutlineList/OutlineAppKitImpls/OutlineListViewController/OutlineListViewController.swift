@@ -14,7 +14,8 @@ open class OutlineListViewController: NSViewController, ObservableObject {
     
     var dataSource: OutlineListViewDataSource
     var delegate: OutlineListViewDelegate
-//    lazy var menuHandler: MBMenuHandler = .init()
+    public var isShowing = false
+    lazy var menuHandler: MBMenuHandler = .init()
     
     required public init() {
         self.dataSource = .init()
@@ -30,13 +31,27 @@ open class OutlineListViewController: NSViewController, ObservableObject {
         fatalError("has not been implemented")
     }
     
+    public var swiftUI: some View {
+        OutlineListViewControllerRepresentable(controller: self)
+    }
+    
     public override func loadView() {
         view = NSScrollView(frame: .zero)
     }
     
+    open override func viewDidAppear() {
+        super.viewDidAppear()
+        isShowing = true
+    }
+    
+    open override func viewDidDisappear() {
+        super.viewDidDisappear()
+        isShowing = false
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
-        outlineView = .init(list: list, menuHandler: nil)
+        outlineView = .init(list: list, menuHandler: menuHandler)
         outlineView.delegate = delegate
         outlineView.dataSource = dataSource
         outlineView.rowSizeStyle = .default
@@ -47,10 +62,12 @@ open class OutlineListViewController: NSViewController, ObservableObject {
         scrollView.documentView = outlineView
         scrollView.hasVerticalScroller = true
 
-        reload()
+        Task {
+            await reload()
+        }
     }
     
-    open func reload() {
+    open func reload() async {
         outlineView.setup()
     }
 }

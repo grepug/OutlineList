@@ -15,7 +15,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            TestList(controller)
+            TestList {
+                controller
+            }
             
             Button("Add") {
                 controller.getRowOne()

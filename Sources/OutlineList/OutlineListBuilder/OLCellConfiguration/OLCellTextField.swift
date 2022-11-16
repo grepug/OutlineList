@@ -17,7 +17,7 @@ public struct OLCellTextField {
     }
 }
 
-extension OLCellTextField: OLCellConfigurationConvertible {
+extension OLCellTextField: OLCell {
     public func nsView() -> NSView {
         let container = NSView()
         let field = CustomTextField(string: text)
