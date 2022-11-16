@@ -18,12 +18,13 @@ public class OutlineListView: NSOutlineView {
     var referenceIDMap: [String: ID] = [:]
     var idTree: [ID?: [ID]] = [:]
     
-    let menuHandler = MBMenuHandler()
+    weak var menuHandler: MBMenuHandler?
     var contextualRect = NSRect()
     public var currentMenu: NSMenu?
     
-    init(list: OLList) {
+    init(list: OLList, menuHandler: MBMenuHandler?) {
         self.list = list
+        self.menuHandler = menuHandler
         super.init(frame: .zero)
         
         self.idTree = makeIDTree(list: list)
@@ -52,24 +53,30 @@ public class OutlineListView: NSOutlineView {
         super.didCloseMenu(menu, with: event)
         clearContextualRect()
     }
+    
+    func setup() {
+        setupColumns()
+        setupProperties()
+    }
 }
 
-extension OutlineListView {
+private extension OutlineListView {
     func setupColumns() {
-        guard list.showingColumnHeaders else {
-            tableColumns.forEach {
-                removeTableColumn($0)
-            }
-            return
+        if !list.showingColumnHeaders {
+            headerView = nil
         }
         
-        let columns = list.columnConfigurations
+        let columns = list.columns
 
         for col in columns {
-            let column = NSTableColumn(identifier: .init(col.title))
+            let column = NSTableColumn(identifier: .init(col.id))
             column.title = col.title
-            
+
             addTableColumn(column)
         }
+    }
+    
+    func setupProperties() {
+        usesAlternatingRowBackgroundColors = list.usesAlternatingRowBackgroundColors
     }
 }

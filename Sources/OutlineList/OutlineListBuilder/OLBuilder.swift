@@ -51,3 +51,9 @@ public extension OLBuilder {
         components
     }
 }
+
+public extension OLBuilder {
+    static func buildBlock(_ components: OLCoumn...) -> [OLCoumn] {
+        components
+    }
+}

@@ -7,21 +7,19 @@
 
 import AppKit
 import SwiftUI
+import MenuBuilder
 
 open class OutlineListViewController: NSViewController, ObservableObject {
     public var outlineView: OutlineListView!
     
     var dataSource: OutlineListViewDataSource
     var delegate: OutlineListViewDelegate
+//    lazy var menuHandler: MBMenuHandler = .init()
     
     required public init() {
         self.dataSource = .init()
         self.delegate = .init()
         super.init(nibName: nil, bundle: nil)
-        
-        let scrollView = view as! NSScrollView
-        scrollView.documentView = outlineView
-        scrollView.hasVerticalScroller = true
     }
     
     required public init?(coder: NSCoder) {
@@ -38,18 +36,22 @@ open class OutlineListViewController: NSViewController, ObservableObject {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        outlineView = .init(list: list)
+        outlineView = .init(list: list, menuHandler: nil)
         outlineView.delegate = delegate
         outlineView.dataSource = dataSource
         outlineView.rowSizeStyle = .default
         outlineView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         outlineView.autoresizesOutlineColumn = false
+        
+        let scrollView = view as! NSScrollView
+        scrollView.documentView = outlineView
+        scrollView.hasVerticalScroller = true
 
         reload()
     }
     
     open func reload() {
-        outlineView.setupColumns()
+        outlineView.setup()
     }
 }
 

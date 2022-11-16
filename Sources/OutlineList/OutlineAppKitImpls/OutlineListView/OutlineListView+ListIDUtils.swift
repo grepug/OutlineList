@@ -8,9 +8,9 @@
 import Foundation
 
 extension OutlineListView {
-    typealias ID = NSString
+    public typealias ID = NSString
     
-    func refID(_ id: String) -> ID {
+    public func refID(_ id: String) -> ID {
         if let id = referenceIDMap[id] {
             return id
         }

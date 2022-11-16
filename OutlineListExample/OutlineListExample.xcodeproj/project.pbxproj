@@ -12,6 +12,7 @@
 		2AD9D18029223726007DCB2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9D17F29223726007DCB2B /* Assets.xcassets */; };
 		2AD9D18329223726007DCB2B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9D18229223726007DCB2B /* Preview Assets.xcassets */; };
 		2AD9D18E29223D1E007DCB2B /* OutlineList in Frameworks */ = {isa = PBXBuildFile; productRef = 2AD9D18D29223D1E007DCB2B /* OutlineList */; };
+		2AD9D1902924B149007DCB2B /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9D18F2924B149007DCB2B /* TestList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		2AD9D18229223726007DCB2B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2AD9D18429223726007DCB2B /* OutlineListExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OutlineListExample.entitlements; sourceTree = "<group>"; };
 		2AD9D18B29223742007DCB2B /* OutlineList */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OutlineList; path = ..; sourceTree = "<group>"; };
+		2AD9D18F2924B149007DCB2B /* TestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,8 @@
 		2AD9D17A29223725007DCB2B /* OutlineListExample */ = {
 			isa = PBXGroup;
 			children = (
+				2AD9D1912924B14F007DCB2B /* ContentView */,
 				2AD9D17B29223725007DCB2B /* OutlineListExampleApp.swift */,
-				2AD9D17D29223725007DCB2B /* ContentView.swift */,
 				2AD9D17F29223726007DCB2B /* Assets.xcassets */,
 				2AD9D18429223726007DCB2B /* OutlineListExample.entitlements */,
 				2AD9D18129223726007DCB2B /* Preview Content */,
@@ -87,6 +89,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2AD9D1912924B14F007DCB2B /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				2AD9D17D29223725007DCB2B /* ContentView.swift */,
+				2AD9D18F2924B149007DCB2B /* TestList.swift */,
+			);
+			path = ContentView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AD9D1902924B149007DCB2B /* TestList.swift in Sources */,
 				2AD9D17E29223725007DCB2B /* ContentView.swift in Sources */,
 				2AD9D17C29223725007DCB2B /* OutlineListExampleApp.swift in Sources */,
 			);

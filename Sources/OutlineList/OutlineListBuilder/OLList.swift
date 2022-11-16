@@ -7,20 +7,19 @@
 
 import AppKit
 
-public struct OLCoumnConfiguration {
-    public var title: String
-    
-    public init(title: String) {
-        self.title = title
-    }
-}
-
 public struct OLList {
     var rows: [OLRow]
+    var columns: [OLCoumn]
     var showingColumnHeaders: Bool = false
-    var columnConfigurations: [OLCoumnConfiguration] = []
+    var usesAlternatingRowBackgroundColors: Bool = false
+    
+    public init(@OLBuilder columns: () -> [OLCoumn], @OLBuilder rows: () -> [OLRow]) {
+        self.columns = columns()
+        self.rows = rows()
+    }
     
     public init(@OLBuilder rows: () -> [OLRow]) {
+        self.columns = [OLCoumn()]
         self.rows = rows()
     }
 }
@@ -32,9 +31,9 @@ public extension OLList {
         return me
     }
     
-    func columns(_ configs: [OLCoumnConfiguration]) -> Self {
+    func useAlternatingRowBackgroundColors(_ isTrue: Bool) -> Self {
         var me = self
-        me.columnConfigurations = configs
+        me.usesAlternatingRowBackgroundColors = isTrue
         return me
     }
 }

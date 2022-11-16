@@ -67,6 +67,10 @@ extension OutlineListView {
             return nil
         }
         
+        guard let menuHandler = menuHandler else {
+            return nil
+        }
+        
         let menu = menuHandler.makeItems(mbMenus: mbMenus(col), column: col)
         currentMenu = menu
         
