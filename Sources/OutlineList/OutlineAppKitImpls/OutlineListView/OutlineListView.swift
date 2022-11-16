@@ -47,6 +47,11 @@ public class OutlineListView: NSOutlineView {
         super.mouseDown(with: event)
         clearContextualRect()
     }
+    
+    public override func didCloseMenu(_ menu: NSMenu, with event: NSEvent?) {
+        super.didCloseMenu(menu, with: event)
+        clearContextualRect()
+    }
 }
 
 extension OutlineListView {

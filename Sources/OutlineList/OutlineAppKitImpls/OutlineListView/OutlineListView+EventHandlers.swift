@@ -25,7 +25,8 @@ extension OutlineListView {
         // Reset the contextual menu frame for next use.
         contextualRect = NSRect()
         
-        let targetRow = row(at: convert(event.locationInWindow, from: nil))
+        let targetRow = row(for: event)
+
         if targetRow != -1 {
             let rect = rect(ofRow: targetRow)
             
@@ -49,7 +50,7 @@ extension OutlineListView {
         
         // Clear the highlight if the user clicks away from the menu.
         contextualRect = NSRect()
-        setNeedsDisplay(contextualRect)
+        setNeedsDisplay(bounds)
     }
 }
 
