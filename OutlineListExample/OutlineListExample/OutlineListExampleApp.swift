@@ -13,15 +13,16 @@ struct OutlineListExampleApp: App {
     
     var body: some Scene {
         WindowGroup {
-            VStack {
-                Button("Toggle") {
-                    showing.toggle()
-                }
-                
-                if showing {
-                    ContentView()
-                }
-            }
+//            VStack {
+//                Button("Toggle") {
+//                    showing.toggle()
+//                }
+//
+//                if showing {
+//                    ContentView()
+//                }
+//            }
+            ContentView()
         }
     }
 }

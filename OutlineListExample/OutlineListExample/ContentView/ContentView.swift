@@ -12,17 +12,21 @@ import MenuBuilder
 
 struct ContentView: View {
     @StateObject var controller = MyController()
+    @StateObject var controller2 = MyController()
     
     var body: some View {
-        VStack {
-            TestList {
-                controller
+            NavigationSplitView {
+                TestList {
+                    controller
+                }
+            } detail: {
+                TestList {
+                    controller2
+                }
             }
-            
-            Button("Add") {
-                controller.getRowOne()
-            }
-        }
-        .padding()
+
+//            Button("Add") {
+//                controller.getRowOne()
+//            }
     }
 }

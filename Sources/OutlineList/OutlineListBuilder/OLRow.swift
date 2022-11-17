@@ -16,6 +16,7 @@ public struct OLRow {
     var height: CGFloat?
     var cellConfigurations: [OLCell]
     var menus: OLRowMenus?
+    var isGroupItem = false
     
     public init(id: String, @OLBuilder configurations: () -> [OLCell]) {
         self.id = id
@@ -39,6 +40,12 @@ public extension OLRow {
     func menus(@MenuBuilder _ menus: @escaping OLRowMenus) -> Self {
         var me = self
         me.menus = menus
+        return me
+    }
+    
+    func isGroupItem(_ isTrue: Bool = true) -> Self {
+        var me = self
+        me.isGroupItem = isTrue
         return me
     }
 }

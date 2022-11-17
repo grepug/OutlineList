@@ -15,24 +15,48 @@ struct TestList: OutlineListSwiftUIView {
     var list: OLList {
         OLList {
             OLCoumn()
-            OLCoumn("a")
-            OLCoumn("b")
+//            OLCoumn("properties")
         } rows: {
-            for id in vc().data {
-                OLRow(id: id) {
-                    OLCellTextField(text: "\(vc().text)")
-                    swiftUICell
-                    OLCellSwiftUI {
-                        CellView(count: vc().count)
-                    }
-                }
-                .menus {
-                    menus(for: $0)
+            OLRow(id: "title") {
+                OLCellSwiftUI {
+                    Text("get 1")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 4)
                 }
             }
+            
+            OLRow(id: "pos1") {
+                OLCellTextField(text: "get verb")
+            }
+            .parentID("title")
+            
+            OLRow(id: "def1") {
+                OLCellTextField(text: "1. get something to receive something")
+            }
+            .parentID("pos1")
+            
+            OLRow(id: "def2") {
+                OLCellTextField(text: "2. to obtain something")
+            }
+            .parentID("pos1")
+            
+            OLRow(id: "pos2") {
+                OLCellTextField(text: "get noun")
+            }
+            .parentID("title")
+            
+            OLRow(id: "def2-1") {
+                OLCellTextField(text: "1. get something to receive something")
+            }
+            .parentID("pos2")
+            
+            OLRow(id: "def2-2") {
+                OLCellTextField(text: "2. to obtain something")
+            }
+            .parentID("pos2")
         }
-        .showColumnHeaders(true)
-        .useAlternatingRowBackgroundColors(true)
+        .showColumnHeaders(false)
     }
     
     @MenuBuilder

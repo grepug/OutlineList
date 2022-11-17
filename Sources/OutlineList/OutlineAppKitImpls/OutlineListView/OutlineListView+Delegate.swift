@@ -12,15 +12,13 @@ class OutlineListViewDelegate: NSObject, NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let outlineView = outlineView as! OutlineListView
         let row = row(item, in: outlineView.list)
+        let column = tableColumn.map {
+            outlineView.tableColumns.firstIndex(of: $0)!
+        } ?? 0
         
-        if let tableColumn {
-            let column = outlineView.tableColumns.firstIndex(of: tableColumn)!
-            let cell = row.cellConfigurations[column]
-            
-            return cell.nsView()
-        }
-            
-        return NSTextField(string: "group")
+        let cell = row.cellConfigurations[column]
+        
+        return cell.nsView()
     }
     
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
@@ -30,9 +28,12 @@ class OutlineListViewDelegate: NSObject, NSOutlineViewDelegate {
         return row.height ?? 22
     }
     
-//    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
-//        true
-//    }
+    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+        let outlineView = outlineView as! OutlineListView
+        let row = row(item, in: outlineView.list)
+        
+        return row.isGroupItem
+    }
 }
 
 extension OutlineListViewDelegate {

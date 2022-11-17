@@ -54,9 +54,14 @@ public class OutlineListView: NSOutlineView {
         clearContextualRect()
     }
     
+    public override func selectRowIndexes(_ indexes: IndexSet, byExtendingSelection extend: Bool) {
+        super.selectRowIndexes(indexes, byExtendingSelection: extend)
+    }
+    
     func setup() {
         setupColumns()
         setupProperties()
+        expandItem(nil, expandChildren: true)
     }
 }
 
