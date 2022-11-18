@@ -68,7 +68,11 @@ open class OutlineListViewController: NSViewController, ObservableObject {
     }
     
     open func reload() async {
+        outlineView.list = list
         outlineView.setup()
+        outlineView.reloadData()
+        outlineView.expandItem(nil, expandChildren: true)
+        outlineView.usesAutomaticRowHeights = true
     }
 }
 

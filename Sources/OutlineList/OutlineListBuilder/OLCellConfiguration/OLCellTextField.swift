@@ -19,24 +19,23 @@ public struct OLCellTextField {
 
 extension OLCellTextField: OLCell {
     public func nsView() -> NSView {
-        let container = NSView()
+        let container = NSTableCellView()
         let field = CustomTextField(string: text)
         field.isEditable = false
         field.isBordered = false
         field.drawsBackground = false
         field.isBezeled = false
-        field.cell?.wraps = true
-        field.lineBreakMode = .byWordWrapping
+        field.lineBreakMode = .byTruncatingMiddle
         field.cell?.wraps = true
         field.usesSingleLineMode = false
-        field.maximumNumberOfLines = 1
+        field.maximumNumberOfLines = 0
         
         container.addSubview(field)
-        
+
         field.translatesAutoresizingMaskIntoConstraints = false
-            
         NSLayoutConstraint.activate([
-            field.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            field.topAnchor.constraint(equalTo: container.topAnchor),
+            field.heightAnchor.constraint(equalTo: container.heightAnchor),
             field.leadingAnchor.constraint(equalTo: container.leadingAnchor),
             field.trailingAnchor.constraint(equalTo: container.trailingAnchor),
         ])
@@ -55,9 +54,12 @@ public class CustomTextField: NSTextField {
         isBezeled = false
         drawsBackground = false
         usesSingleLineMode = true
-        cell?.wraps = false
+        cell?.wraps = true
         cell?.isScrollable = false
-        maximumNumberOfLines = 1
+    }
+    
+    deinit {
+        print("deinit textField")
     }
     
     required init?(coder: NSCoder) {

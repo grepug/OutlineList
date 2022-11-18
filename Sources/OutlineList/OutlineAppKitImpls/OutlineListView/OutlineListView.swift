@@ -54,6 +54,15 @@ public class OutlineListView: NSOutlineView {
         clearContextualRect()
     }
     
+    public override func viewDidEndLiveResize() {
+        super.viewDidEndLiveResize()
+        let selectedRowIndexes = self.selectedRowIndexes
+        beginUpdates()
+        reloadData()
+        endUpdates()
+        selectRowIndexes(selectedRowIndexes, byExtendingSelection: false)
+    }
+    
     public override func selectRowIndexes(_ indexes: IndexSet, byExtendingSelection extend: Bool) {
         super.selectRowIndexes(indexes, byExtendingSelection: extend)
     }
@@ -69,6 +78,10 @@ private extension OutlineListView {
     func setupColumns() {
         if !list.showingColumnHeaders {
             headerView = nil
+        }
+        
+        guard tableColumns.isEmpty else {
+            return
         }
         
         let columns = list.columns

@@ -17,15 +17,21 @@ class OutlineListViewDelegate: NSObject, NSOutlineViewDelegate {
         } ?? 0
         
         let cell = row.cellConfigurations[column]
+        let view = cell.nsView()
         
-        return cell.nsView()
+        return view
     }
     
-    func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
-        let outlineView = outlineView as! OutlineListView
-        let row = row(item, in: outlineView.list)
+    func outlineView(_ outlineView: NSOutlineView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        guard let cellView = rowView.subviews.first(where: { $0 is NSTableCellView }) else {
+            return
+        }
         
-        return row.height ?? 22
+        cellView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cellView.trailingAnchor.constraint(equalTo: rowView.trailingAnchor, constant: -16),
+            cellView.widthAnchor.constraint(lessThanOrEqualTo: outlineView.widthAnchor)
+        ])
     }
     
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
